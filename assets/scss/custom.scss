@@ -72,3 +72,23 @@
 .series-box .series-list li.current { list-style: none; margin-left: -20px; padding-left: 20px; font-weight: 700; }
 .series-box .series-list li.current::before { content: "▸ "; color: var(--accent-color); }
 .series-box a { color: inherit; }
+
+/* 6) 콘텐츠 상단 헤더 (hELLO 스타일 — 홈) */
+.page-header {
+    text-align: center;
+    margin-bottom: var(--section-separation, 40px);
+    padding: 6px 0 28px;
+    border-bottom: 1px solid var(--card-separator-color, rgba(218,218,218,.5));
+}
+.page-header-title {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--card-text-color-main);
+    margin: 0 0 8px;
+}
+.page-header-subtitle {
+    font-size: 1.5rem;
+    color: var(--card-text-color-secondary);
+    margin: 0;
+}

@@ -1,0 +1,22 @@
+{{ define "main" }}
+    {{/* hELLO 스타일 콘텐츠 상단 헤더 */}}
+    <header class="page-header">
+        <h1 class="page-header-title">전체 글</h1>
+        <p class="page-header-subtitle">{{ .Site.Title }}</p>
+    </header>
+
+    {{- $paginator := partial "helper/paginator.html" . -}}
+
+    <section class="article-list">
+        {{ range $index, $element := $paginator.Pages }}
+            {{ partial "article-list/default" . }}
+        {{ end }}
+    </section>
+
+    {{- partial "pagination.html" . -}}
+    {{- partial "footer/footer" . -}}
+{{ end }}
+
+{{ define "right-sidebar" }}
+    {{ partial "sidebar/right.html" (dict "Context" . "Scope" "homepage") }}
+{{ end }}
