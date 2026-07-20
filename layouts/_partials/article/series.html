@@ -1,0 +1,13 @@
+{{- /* 벨로그식 시리즈 네비: 이 글이 속한 시리즈의 모든 글을 series_order 순으로 렌더. series 숏코드에서 호출됨. */ -}}
+{{- $page := . -}}
+{{- with ($page.GetTerms "series") -}}
+  {{- $term := index . 0 -}}
+  <aside class="series-box">
+    <div class="series-head">시리즈 · {{ $term.LinkTitle }} <span class="series-count">({{ len $term.Pages }}편)</span></div>
+    <ol class="series-list">
+      {{- range ($term.Pages.ByParam "series_order") }}
+      <li{{ if eq .RelPermalink $page.RelPermalink }} class="current" aria-current="true"{{ end }}><a href="{{ .RelPermalink }}">{{ .LinkTitle | default .Title }}</a></li>
+      {{- end }}
+    </ol>
+  </aside>
+{{- end -}}

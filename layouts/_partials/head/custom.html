@@ -1,0 +1,5 @@
+{{- /* 방문자 집계 — GoatCounter (배포 환경에서만 로드, 로컬 개발은 집계 안 함) */ -}}
+{{ if hugo.IsProduction }}
+<script data-goatcounter="https://xxbeann.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+{{ end }}

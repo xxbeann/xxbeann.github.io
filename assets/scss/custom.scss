@@ -1,0 +1,74 @@
+/* ================================================================
+   assets/scss/custom.scss — Stack 테마를 티스토리 hELLO 룩으로 매칭
+   hELLO-dist 추출 토큰: SUIT / Source Code Pro / 모노크롬 그레이스케일 / 720px
+   style.scss의 마지막 @import라 여기 값이 최우선.
+   ================================================================ */
+
+/* 1) 폰트 — hELLO와 동일 (SUIT 본문 + Source Code Pro 코드) */
+@import url("https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital@0;1&display=swap");
+/* SUIT가 안 되면 검증된 Pretendard로 교체하고 아래 "SUIT"를 "Pretendard"로:
+   @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css"); */
+
+/* 2) hELLO 그레이스케일 팔레트 */
+:root {
+    --h-50:#fafafa; --h-100:#f5f5f5; --h-200:#e5e5e5; --h-300:#d4d4d4; --h-400:#a3a3a3;
+    --h-500:#737373; --h-600:#525252; --h-700:#404040; --h-800:#262626; --h-900:#171717;
+
+    /* 폰트 */
+    --base-font-family: "SUIT", var(--sys-font-family), sans-serif;
+    --article-font-family: var(--base-font-family);
+    --code-font-family: "Source Code Pro", Menlo, Monaco, Consolas, monospace;
+
+    /* 라이트 — 모노크롬 (강조 = 거의 검정, 초록 X) */
+    --body-background: #f5f5f5;
+    --body-text-color: #404040;
+    --accent-color: #171717;
+    --accent-color-darker: #000000;
+    --accent-color-text: #ffffff;
+    --card-background: #ffffff;
+    --card-text-color-main: #171717;
+    --card-text-color-secondary: #737373;
+}
+
+/* 3) 다크 — 특정도를 :root[data-scheme]로 맞춰야 테마 기본값을 이김 */
+:root[data-scheme="dark"] {
+    --body-background: #1c1c1c;
+    --body-text-color: rgba(255,255,255,.72);
+    --accent-color: #f5f5f5;
+    --accent-color-darker: #d4d4d4;
+    --accent-color-text: #000000;
+    --card-background: #262626;
+    --card-text-color-main: rgba(255,255,255,.92);
+    --card-text-color-secondary: rgba(255,255,255,.6);
+}
+
+/* 4) 본문 폭 — hELLO 720px 감성 */
+.article-content { max-width: 720px; margin-inline: auto; }
+
+/* 4.5) 카테고리 배지 — hELLO 모노크롬 (테마가 인라인 style로 색을 넣어 !important 필요) */
+.article-category a {
+    background-color: var(--h-200) !important;
+    color: var(--h-600) !important;
+}
+:root[data-scheme="dark"] .article-category a {
+    background-color: var(--h-700) !important;
+    color: var(--h-300) !important;
+}
+
+/* 5) 벨로그식 시리즈 네비 박스 (article/series.html 파셜 & series 숏코드용) */
+.series-box {
+    border: 1px solid var(--card-separator-color, #dadada);
+    border-radius: var(--card-border-radius, 10px);
+    background: var(--card-background);
+    padding: 16px 20px;
+    margin: 0 0 var(--section-separation, 40px);
+    font-size: 1.5rem;
+}
+.series-box .series-head { font-weight: 700; margin-bottom: 8px; color: var(--card-text-color-main); }
+.series-box .series-count { color: var(--card-text-color-secondary); font-weight: 400; }
+.series-box .series-list { margin: 0; padding-left: 20px; }
+.series-box .series-list li { margin: 4px 0; }
+.series-box .series-list li.current { list-style: none; margin-left: -20px; padding-left: 20px; font-weight: 700; }
+.series-box .series-list li.current::before { content: "▸ "; color: var(--accent-color); }
+.series-box a { color: inherit; }

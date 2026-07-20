@@ -1,0 +1,99 @@
+# =====================================================================
+#  코드 심는 콩 — Hugo + Stack 블로그 설정
+#  ⚠ hugo 미설치 환경에서 작성됨 → 첫 `hugo server` 시 경고/에러 있으면 알려줘 바로 잡음.
+#  테마 요구: Hugo extended 0.157.0+
+# =====================================================================
+baseURL = "https://xxbeann.github.io/"    # GitHub Pages 사용자 사이트 (CI가 --baseURL로 덮어씀)
+locale = "ko-kr"
+title = "코드 심는 콩"
+theme = "hugo-theme-stack"
+
+defaultContentLanguage = "ko"
+hasCJKLanguage = true                       # 한글 요약/글자수 정확히
+# buildFuture = true                        # ← 미래 날짜 글도 보이게 하려면 주석 해제 (날짜 자유)
+
+[pagination]
+  pagerSize = 5
+
+# 검색 JSON은 홈이 아니라 search 페이지가 생성 (content/page/search/index.md의 outputs)
+
+[permalinks]
+  post = "/:contentbasename/"      # 폴더명(영문) 기반 → 한글 슬러그 인코딩 방지
+  page = "/:slug/"                 # 페이지는 slug 명시 (검색 다중출력 + contentbasename 조합이 Hugo 크래시 유발)
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  series = "series"                         # ← 벨로그식 시리즈
+
+[params]
+  mainSections = ["post"]
+  rssFullContent = true
+  favicon = "img/avatar.png"                # assets/img/avatar.png 에 직접 넣기
+
+  [params.footer]
+    since = 2026
+
+  [params.dateFormat]
+    published = "2006.01.02"
+    lastUpdated = "2006.01.02"
+
+  [params.sidebar]
+    emoji = "🌱"
+    subtitle = "코드를 심는 개발 블로그"
+    avatar = "img/avatar.png"               # assets/img/avatar.png
+
+  [params.article]
+    toc = true
+    readingTime = true
+    [params.article.license]
+      enabled = false
+
+  [params.colorScheme]
+    toggle = true
+    default = "light"                       # 티스토리(hELLO) 라이트 매칭
+
+  [params.comments]
+    enabled = false                         # 나중에 giscus 등으로 (다음 결정거리)
+
+  [params.widgets]
+    homepage = [
+      { type = "search" },
+      { type = "archives", params = { limit = 5 } },
+      { type = "categories", params = { limit = 10 } },
+      { type = "tag-cloud", params = { limit = 10 } },
+    ]
+    page = [
+      { type = "toc" },
+    ]
+
+# ── 사이드바 소셜 링크 (아이콘: tabler icon 이름) ──
+[[menu.social]]
+  identifier = "github"
+  name = "GitHub"
+  url = "https://github.com/xxbeann"
+  [menu.social.params]
+    icon = "brand-github"
+
+[[menu.social]]
+  identifier = "tistory"
+  name = "Tistory"
+  url = "https://xxbeann.tistory.com"
+  [menu.social.params]
+    icon = "rss"
+
+# ── 마크다운 / 코드 하이라이트 ──
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+    ordered = true
+  [markup.highlight]
+    noClasses = false                       # Stack 자체 코드 테마 사용 (hELLO는 xcode/vs2015였음)
+    codeFences = true
+    guessSyntax = true
+    lineNos = true
+    lineNumbersInTable = true
+    tabWidth = 4
