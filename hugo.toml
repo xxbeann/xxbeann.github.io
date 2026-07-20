@@ -39,7 +39,6 @@ hasCJKLanguage = true                       # 한글 요약/글자수 정확히
     lastUpdated = "2006.01.02"
 
   [params.sidebar]
-    emoji = "🌱"
     subtitle = "코드를 심는 개발 블로그"
     avatar = "img/avatar.png"               # assets/img/avatar.png
 
