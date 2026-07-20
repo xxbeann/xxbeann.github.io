@@ -1,0 +1,45 @@
+{{ define "main" }}
+    {{/* hELLO 스타일 가운데 헤더 (카테고리/태그/섹션 통일) */}}
+    <header class="page-header">
+        <h1 class="page-header-title">{{ .Title }}</h1>
+        <p class="page-header-subtitle">{{ .Site.Title }}</p>
+    </header>
+
+    {{- $pages := partial "helper/pages.html" . -}}
+    {{- $subsections := .Sections -}}
+
+    {{- if and (eq (len $pages) (len $subsections)) (eq $pages $subsections) -}}
+        {{- $subsections = slice -}}
+    {{- end -}}
+
+    {{- with $subsections -}}
+        <aside>
+            <h2 class="section-title">{{ T "list.subsection" (len $subsections) }}</h2>
+            <div class="subsection-list">
+                <div class="article-list--tile">
+                    {{ range . }}
+                        {{ partial "article-list/tile" . }}
+                    {{ end }}
+                </div>
+            </div>
+        </aside>
+    {{- end -}}
+
+    {{/* List only pages that are not a subsection */}}
+    {{ $paginator := partial "helper/paginator.html" . }}
+    {{ with $paginator }}
+        <section class="article-list--compact">
+            {{ range .Pages }}
+                {{ partial "article-list/compact" . }}
+            {{ end }}
+        </section>
+    {{ end }}
+
+    {{- partial "pagination.html" . -}}
+
+    {{ partialCached "footer/footer" . }}
+{{ end }}
+
+{{ define "right-sidebar" }}
+    {{ partial "sidebar/right.html" (dict "Context" . "Scope" "homepage") }}
+{{ end }}
