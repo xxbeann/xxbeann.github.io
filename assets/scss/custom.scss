@@ -92,3 +92,30 @@
     color: var(--card-text-color-secondary);
     margin: 0;
 }
+
+/* 7) 방문자수 위젯 (GoatCounter — 티스토리식 오늘/전체) */
+.widget.visitor .visitor--list {
+    display: flex;
+    gap: var(--spacing-sm, 10px);
+}
+.widget.visitor .visitor-row {
+    flex: 1;
+    text-align: center;
+    padding: 10px 6px;
+    border-radius: 8px;
+    background: var(--body-background);
+}
+.widget.visitor .visitor-label {
+    display: block;
+    font-size: 1.2rem;
+    color: var(--card-text-color-secondary);
+    margin-bottom: 4px;
+}
+.widget.visitor .visitor-count {
+    display: block;
+    font-size: 1.9rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--card-text-color-main);
+    font-variant-numeric: tabular-nums;
+}

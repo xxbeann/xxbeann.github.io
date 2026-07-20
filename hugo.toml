@@ -30,6 +30,7 @@ hasCJKLanguage = true                       # 한글 요약/글자수 정확히
   mainSections = ["post"]
   rssFullContent = true
   favicon = "img/avatar.png"                # assets/img/avatar.png 에 직접 넣기
+  goatcounterCode = "codebean"              # GoatCounter 사이트 코드 (집계 + 방문자수 표시)
 
   [params.footer]
     since = 2026
@@ -58,6 +59,7 @@ hasCJKLanguage = true                       # 한글 요약/글자수 정확히
   [params.widgets]
     homepage = [
       { type = "search" },
+      { type = "visitor" },
       { type = "archives", params = { limit = 5 } },
       { type = "categories", params = { limit = 10 } },
       { type = "tag-cloud", params = { limit = 10 } },

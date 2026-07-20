@@ -1,0 +1,36 @@
+{{- /* 방문자수 위젯 — GoatCounter 공개 카운터(오늘/전체). 인증 없이 JSON fetch. */ -}}
+{{- $code := .Context.Site.Params.goatcounterCode -}}
+{{- with $code -}}
+<section class="widget visitor">
+    <div class="widget-icon">
+        {{ partial "helper/icon" "user" }}
+    </div>
+    <h2 class="widget-title section-title">방문자</h2>
+    <div class="visitor--list" data-gc-code="{{ . }}">
+        <div class="visitor-row">
+            <span class="visitor-label">오늘</span>
+            <span class="visitor-count" data-gc-today>–</span>
+        </div>
+        <div class="visitor-row">
+            <span class="visitor-label">전체</span>
+            <span class="visitor-count" data-gc-total>–</span>
+        </div>
+    </div>
+</section>
+<script>
+(function () {
+  var box = document.querySelector('.widget.visitor .visitor--list');
+  if (!box) return;
+  var base = 'https://' + box.dataset.gcCode + '.goatcounter.com/counter/TOTAL.json';
+  function put(sel, url) {
+    fetch(url).then(function (r) { return r.json(); })
+      .then(function (d) { if (d && d.count != null) box.querySelector(sel).textContent = d.count; })
+      .catch(function () {});
+  }
+  put('[data-gc-total]', base);
+  var n = new Date();
+  var t = n.getFullYear() + '-' + String(n.getMonth() + 1).padStart(2, '0') + '-' + String(n.getDate()).padStart(2, '0');
+  put('[data-gc-today]', base + '?start=' + t);
+})();
+</script>
+{{- end -}}
