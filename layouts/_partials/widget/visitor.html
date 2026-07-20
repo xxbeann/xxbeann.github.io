@@ -24,7 +24,7 @@
   var base = 'https://' + box.dataset.gcCode + '.goatcounter.com/counter/TOTAL.json';
   function put(sel, url) {
     fetch(url).then(function (r) { return r.json(); })
-      .then(function (d) { if (d && d.count != null) box.querySelector(sel).textContent = d.count; })
+      .then(function (d) { if (d && d.count_unique != null) box.querySelector(sel).textContent = d.count_unique; })
       .catch(function () {});
   }
   put('[data-gc-total]', base);
