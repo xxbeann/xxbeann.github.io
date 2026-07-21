@@ -129,6 +129,15 @@ a.series-title:hover { color: var(--card-text-color-main); text-decoration: unde
     color: var(--card-text-color-main); margin: 0 0 6px; }
 .series-card-meta { font-size: 1.3rem; color: var(--card-text-color-secondary); margin: 0; }
 
+/* 9) 티스토리식 카테고리 리스트 (개수 표시) */
+.widget.categorylist .categorylist-list { list-style: none; margin: 0; padding: 0; }
+.widget.categorylist .categorylist-item { padding: 6px 0; font-size: 1.4rem; line-height: 1.4; }
+.widget.categorylist .categorylist-item.is-all { font-weight: 700; margin-bottom: 2px; }
+.widget.categorylist .categorylist-item a { color: var(--card-text-color-main); text-decoration: none; }
+.widget.categorylist .categorylist-item a:hover { color: var(--accent-color); }
+.widget.categorylist .categorylist-count { margin-left: 5px; font-size: 1.2rem;
+    color: var(--card-text-color-secondary); font-variant-numeric: tabular-nums; }
+
 /* 7) 방문자수 위젯 (GoatCounter — 티스토리식 오늘/전체) */
 .widget.visitor .visitor--list {
     display: flex;

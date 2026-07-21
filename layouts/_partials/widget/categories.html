@@ -1,0 +1,25 @@
+{{- /* 티스토리식 카테고리 위젯: 전체 글 보기(총 개수) + 카테고리별 (개수) 세로 리스트 */ -}}
+{{- $context := .Context -}}
+{{- $categories := index $context.Site.Taxonomies "categories" -}}
+{{- $catPage := $context.Site.GetPage "/categories" -}}
+{{- $total := len (where $context.Site.RegularPages "Section" "post") -}}
+<section class="widget categorylist">
+    <div class="widget-icon">
+        {{ partial "helper/icon" "categories" }}
+    </div>
+    <h2 class="widget-title section-title">
+        {{ with $catPage }}<a href="{{ .RelPermalink }}">카테고리</a>{{ else }}카테고리{{ end }}
+    </h2>
+    <ul class="categorylist-list">
+        <li class="categorylist-item is-all">
+            <a href="{{ $context.Site.Home.RelPermalink }}">전체 글 보기</a>
+            <span class="categorylist-count">({{ $total }})</span>
+        </li>
+        {{- range $categories.ByCount }}
+        <li class="categorylist-item">
+            <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
+            <span class="categorylist-count">({{ .Count }})</span>
+        </li>
+        {{- end }}
+    </ul>
+</section>
