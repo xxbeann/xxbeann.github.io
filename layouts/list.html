@@ -1,5 +1,32 @@
 {{ define "main" }}
-    {{/* hELLO 스타일 가운데 헤더 (카테고리/태그/섹션 통일) */}}
+{{- if and (eq .Kind "taxonomy") (eq .Data.Singular "series") -}}
+    {{/* 벨로그식 시리즈 카드 그리드 (/series/) */}}
+    <header class="page-header">
+        <h1 class="page-header-title">시리즈</h1>
+        <p class="page-header-subtitle">{{ .Site.Title }}</p>
+    </header>
+    <div class="series-grid">
+        {{- range .Pages }}
+            {{- $term := . -}}
+            {{- $ordered := $term.Pages.ByParam "series_order" -}}
+            {{- $rep := index $ordered 0 -}}
+            {{- $coverURL := "" -}}
+            {{- with $rep.Params.image }}{{ with ($rep.Resources.GetMatch .) }}{{ $coverURL = .RelPermalink }}{{ end }}{{ end -}}
+            {{- $last := index ($term.Pages.ByDate.Reverse) 0 -}}
+            <a class="series-card" href="{{ $term.RelPermalink }}">
+                <div class="series-card-cover{{ if not $coverURL }} is-placeholder{{ end }}"{{ if $coverURL }} style="background-image:url('{{ $coverURL }}')"{{ end }}>
+                    {{- if not $coverURL }}<span>{{ $term.LinkTitle }}</span>{{ end -}}
+                </div>
+                <div class="series-card-body">
+                    <h2 class="series-card-title">{{ $term.LinkTitle }}</h2>
+                    <p class="series-card-meta">{{ len $term.Pages }}개의 포스트 · {{ $last.Date.Format "2006.01.02" }} 업데이트</p>
+                </div>
+            </a>
+        {{- end }}
+    </div>
+    {{ partialCached "footer/footer" . }}
+{{- else -}}
+    {{/* hELLO 가운데 헤더 (카테고리/태그/섹션) */}}
     <header class="page-header">
         <h1 class="page-header-title">{{ .Title }}</h1>
         <p class="page-header-subtitle">{{ .Site.Title }}</p>
@@ -38,6 +65,7 @@
     {{- partial "pagination.html" . -}}
 
     {{ partialCached "footer/footer" . }}
+{{- end -}}
 {{ end }}
 
 {{ define "right-sidebar" }}

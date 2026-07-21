@@ -112,6 +112,23 @@ a.series-title:hover { color: var(--card-text-color-main); text-decoration: unde
     margin: 0;
 }
 
+/* 8) 벨로그식 시리즈 카드 그리드 (/series/ 페이지) */
+.series-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 8px; }
+@media (max-width: 640px) { .series-grid { grid-template-columns: 1fr; } }
+.series-card { display: block; border: 1px solid var(--card-separator-color, #dadada); border-radius: 12px;
+    overflow: hidden; background: var(--card-background); text-decoration: none;
+    transition: transform .15s ease, box-shadow .15s ease; }
+.series-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-l2); }
+.series-card-cover { aspect-ratio: 16 / 9; background-size: cover; background-position: center;
+    display: flex; align-items: center; justify-content: center; }
+.series-card-cover.is-placeholder { background: var(--body-background); border-bottom: 1px solid var(--card-separator-color); }
+.series-card-cover.is-placeholder span { font-size: 1.9rem; font-weight: 800; letter-spacing: -.01em;
+    color: var(--card-text-color-secondary); padding: 0 18px; text-align: center; }
+.series-card-body { padding: 15px 18px 17px; }
+.series-card-title { font-size: 1.7rem; font-weight: 800; letter-spacing: -.01em;
+    color: var(--card-text-color-main); margin: 0 0 6px; }
+.series-card-meta { font-size: 1.3rem; color: var(--card-text-color-secondary); margin: 0; }
+
 /* 7) 방문자수 위젯 (GoatCounter — 티스토리식 오늘/전체) */
 .widget.visitor .visitor--list {
     display: flex;

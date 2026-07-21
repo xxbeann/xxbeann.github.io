@@ -68,6 +68,15 @@ hasCJKLanguage = true                       # 한글 요약/글자수 정확히
       { type = "toc" },
     ]
 
+# ── 사이드바 메뉴 ──
+[[menu.main]]
+  identifier = "series"
+  name = "시리즈"
+  url = "/series/"
+  weight = 1
+  [menu.main.params]
+    icon = "categories"
+
 # ── 사이드바 소셜 링크 (아이콘: tabler icon 이름) ──
 [[menu.social]]
   identifier = "github"
