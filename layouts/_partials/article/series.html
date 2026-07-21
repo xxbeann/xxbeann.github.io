@@ -1,13 +1,43 @@
-{{- /* 벨로그식 시리즈 네비: 이 글이 속한 시리즈의 모든 글을 series_order 순으로 렌더. series 숏코드에서 호출됨. */ -}}
+{{- /* 벨로그식 시리즈 네비: series 숏코드에서 호출. 넘버링 + 현재글 강조 + 이전/다음. */ -}}
 {{- $page := . -}}
 {{- with ($page.GetTerms "series") -}}
   {{- $term := index . 0 -}}
+  {{- $posts := $term.Pages.ByParam "series_order" -}}
+  {{- $total := len $posts -}}
+  {{- $curIdx := -1 -}}
+  {{- range $i, $p := $posts -}}
+    {{- if eq $p.RelPermalink $page.RelPermalink }}{{ $curIdx = $i }}{{ end -}}
+  {{- end -}}
   <aside class="series-box">
-    <div class="series-head">시리즈 · {{ $term.LinkTitle }} <span class="series-count">({{ len $term.Pages }}편)</span></div>
-    <ol class="series-list">
-      {{- range ($term.Pages.ByParam "series_order") }}
-      <li{{ if eq .RelPermalink $page.RelPermalink }} class="current" aria-current="true"{{ end }}><a href="{{ .RelPermalink }}">{{ .LinkTitle | default .Title }}</a></li>
-      {{- end }}
-    </ol>
+    <details class="series-details" open>
+      <summary class="series-head">
+        <span class="series-eyebrow">시리즈</span>
+        <span class="series-name">{{ $term.LinkTitle }}</span>
+        <span class="series-count">{{ add $curIdx 1 }}/{{ $total }}</span>
+        <span class="series-toggle" aria-hidden="true"></span>
+      </summary>
+      <ol class="series-list">
+        {{- range $i, $p := $posts }}
+        <li class="series-item{{ if eq $p.RelPermalink $page.RelPermalink }} current{{ end }}">
+          <span class="series-num">{{ add $i 1 }}</span>
+          {{- if eq $p.RelPermalink $page.RelPermalink }}
+          <span class="series-title" aria-current="true">{{ $p.LinkTitle | default $p.Title }}</span>
+          {{- else }}
+          <a class="series-title" href="{{ $p.RelPermalink }}">{{ $p.LinkTitle | default $p.Title }}</a>
+          {{- end }}
+        </li>
+        {{- end }}
+      </ol>
+    </details>
+    {{- if gt $total 1 }}
+    <div class="series-nav">
+      {{- if gt $curIdx 0 }}{{ $prev := index $posts (sub $curIdx 1) }}
+      <a class="series-prev" href="{{ $prev.RelPermalink }}"><span>← 이전 글</span>{{ $prev.LinkTitle | default $prev.Title }}</a>
+      {{- else }}<span></span>{{ end }}
+      {{- if lt $curIdx (sub $total 1) }}{{ $next := index $posts (add $curIdx 1) }}
+      <a class="series-next" href="{{ $next.RelPermalink }}"><span>다음 글 →</span>{{ $next.LinkTitle | default $next.Title }}</a>
+      {{- else }}<span></span>{{ end }}
+    </div>
+    {{- end }}
   </aside>
 {{- end -}}

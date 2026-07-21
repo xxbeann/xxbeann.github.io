@@ -56,22 +56,41 @@
     color: var(--h-300) !important;
 }
 
-/* 5) 벨로그식 시리즈 네비 박스 (article/series.html 파셜 & series 숏코드용) */
+/* 5) 벨로그식 시리즈 네비 박스 */
 .series-box {
     border: 1px solid var(--card-separator-color, #dadada);
-    border-radius: var(--card-border-radius, 10px);
-    background: var(--card-background);
-    padding: 16px 20px;
+    border-radius: 12px;
+    background: var(--body-background);
     margin: 0 0 var(--section-separation, 40px);
-    font-size: 1.5rem;
+    overflow: hidden;
 }
-.series-box .series-head { font-weight: 700; margin-bottom: 8px; color: var(--card-text-color-main); }
-.series-box .series-count { color: var(--card-text-color-secondary); font-weight: 400; }
-.series-box .series-list { margin: 0; padding-left: 20px; }
-.series-box .series-list li { margin: 4px 0; }
-.series-box .series-list li.current { list-style: none; margin-left: -20px; padding-left: 20px; font-weight: 700; }
-.series-box .series-list li.current::before { content: "▸ "; color: var(--accent-color); }
-.series-box a { color: inherit; }
+.series-details { padding: 18px 22px 6px; }
+.series-head { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 10px; }
+.series-head::-webkit-details-marker { display: none; }
+.series-eyebrow { font-size: 1.1rem; font-weight: 700; letter-spacing: .06em; color: var(--accent-color); text-transform: uppercase; }
+.series-name { font-size: 1.7rem; font-weight: 800; letter-spacing: -.01em; color: var(--card-text-color-main); }
+.series-count { font-size: 1.2rem; color: var(--card-text-color-secondary); font-variant-numeric: tabular-nums; }
+.series-toggle { margin-left: auto; width: 9px; height: 9px;
+    border-right: 2px solid var(--card-text-color-secondary); border-bottom: 2px solid var(--card-text-color-secondary);
+    transform: rotate(45deg); transition: transform .2s; }
+.series-details[open] .series-toggle { transform: rotate(-135deg); }
+.series-list { margin: 14px 0 8px; padding: 0; list-style: none; }
+.series-item { display: flex; align-items: flex-start; gap: 11px; padding: 6px 0; font-size: 1.5rem; line-height: 1.5; }
+.series-num { flex: 0 0 auto; width: 21px; height: 21px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 1.05rem; font-weight: 700; font-variant-numeric: tabular-nums; margin-top: 2px;
+    background: var(--card-separator-color); color: var(--card-text-color-secondary); }
+.series-item.current .series-num { background: var(--accent-color); color: var(--accent-color-text); }
+.series-title { color: var(--card-text-color-secondary); text-decoration: none; }
+a.series-title:hover { color: var(--card-text-color-main); text-decoration: underline; }
+.series-item.current .series-title { color: var(--card-text-color-main); font-weight: 700; }
+.series-nav { display: flex; justify-content: space-between; gap: 14px;
+    border-top: 1px solid var(--card-separator-color); padding: 12px 22px 14px; }
+.series-nav a { display: flex; flex-direction: column; gap: 2px; font-size: 1.3rem; min-width: 0;
+    color: var(--card-text-color-main); text-decoration: none; max-width: 46%; }
+.series-nav a span { font-size: 1.1rem; color: var(--card-text-color-secondary); }
+.series-nav a:hover { text-decoration: underline; }
+.series-next { text-align: right; margin-left: auto; align-items: flex-end; }
 
 /* 6) 콘텐츠 상단 헤더 (hELLO 스타일 — 홈) */
 .page-header {
