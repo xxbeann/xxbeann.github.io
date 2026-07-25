@@ -54,7 +54,19 @@ hasCJKLanguage = true                       # 한글 요약/글자수 정확히
     default = "light"                       # 티스토리(hELLO) 라이트 매칭
 
   [params.comments]
-    enabled = false                         # 나중에 giscus 등으로 (다음 결정거리)
+    enabled  = true
+    provider = "giscus"
+    [params.comments.giscus]
+      repo          = "xxbeann/xxbeann.github.io"
+      repoID        = "R_kgDOTd3D4A"
+      category      = "Announcements"
+      categoryID    = "DIC_kwDOTd3D4M4DB7Tl"
+      mapping       = "pathname"            # 글 URL 경로로 매핑 (제목 바뀌어도 안전)
+      lightTheme    = "light"
+      darkTheme     = "dark_dimmed"
+      lang          = "ko"                  # 댓글 UI 한국어
+      inputPosition = "top"
+      reactionsEnabled = 1
 
   [params.widgets]
     homepage = [
