@@ -38,19 +38,18 @@ git add . && git commit -m "새 글" && git push
 
 ```mermaid
 flowchart LR
-    A[글 작성] --> B{draft?}
-    B -->|true| C[비공개<br/>나만 보기]
+    A[글 작성] --> B{draft 여부}
+    B -->|true| C[비공개: 나만 보기]
     B -->|false| D[git push]
     D --> E[GitHub Actions]
-    E --> F[라이브 배포 🚀]
+    E --> F[라이브 배포]
 ```
 
 시퀀스 다이어그램도 가능:
 
 ```mermaid
 sequenceDiagram
-    참가자 as 방문자
-    브라우저->>GoatCounter: 방문 1건 전송
+    방문자->>GoatCounter: 방문 1건 전송
     GoatCounter-->>위젯: 오늘/전체 숫자
 ```
 
