@@ -164,3 +164,59 @@ a.series-title:hover { color: var(--card-text-color-main); text-decoration: unde
     color: var(--card-text-color-main);
     font-variant-numeric: tabular-nums;
 }
+
+/* 10) 페이지네이션 — hELLO 모노크롬 컴팩트 버튼
+   (Stack 기본은 본문 폭을 꽉 채우는 카드 막대 → 가운데 정렬된 정사각 버튼 그룹으로) */
+.pagination {
+    justify-content: center;
+    gap: 7px;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+    margin-top: var(--section-separation, 40px);
+
+    .page-link {
+        flex: 0 0 auto;
+        min-width: 40px;
+        height: 40px;
+        padding: 0 7px;
+        border: 1px solid var(--card-separator-color, #e5e5e5);
+        border-radius: 8px;
+        background: var(--card-background);
+        color: var(--card-text-color-secondary);
+        font-size: 1.4rem;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+        transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+
+        /* 이전/다음 화살표도 같은 정사각형 버튼 */
+        &:first-child,
+        &:last-child {
+            flex: 0 0 auto;
+            min-width: 40px;
+            padding: 0;
+        }
+
+        &:hover:not(.current):not(.disabled) {
+            background-color: var(--h-100);
+            border-color: var(--card-text-color-secondary);
+            color: var(--card-text-color-main);
+            opacity: 1;
+        }
+
+        &.current {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: var(--accent-color-text);
+            font-weight: 700;
+        }
+
+        &.disabled {
+            opacity: .35;
+        }
+
+        svg { width: 18px; height: 18px; }
+    }
+}
