@@ -11,7 +11,9 @@
             {{- $ordered := $term.Pages.ByParam "series_order" -}}
             {{- $rep := index $ordered 0 -}}
             {{- $coverURL := "" -}}
-            {{- with $rep.Params.image }}{{ with ($rep.Resources.GetMatch .) }}{{ $coverURL = .RelPermalink }}{{ end }}{{ end -}}
+            {{/* 시리즈 자체 커버(content/series/<이름>/_index.md의 image) 우선, 없으면 첫 글 이미지 */}}
+            {{- with $term.Params.image }}{{ with ($term.Resources.GetMatch .) }}{{ $coverURL = .RelPermalink }}{{ end }}{{ end -}}
+            {{- if not $coverURL }}{{ with $rep.Params.image }}{{ with ($rep.Resources.GetMatch .) }}{{ $coverURL = .RelPermalink }}{{ end }}{{ end }}{{ end -}}
             {{- $last := index ($term.Pages.ByDate.Reverse) 0 -}}
             <a class="series-card" href="{{ $term.RelPermalink }}">
                 <div class="series-card-cover{{ if not $coverURL }} is-placeholder{{ end }}"{{ if $coverURL }} style="background-image:url('{{ $coverURL }}')"{{ end }}>
