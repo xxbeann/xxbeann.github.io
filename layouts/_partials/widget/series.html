@@ -1,4 +1,6 @@
-{{- /* 시리즈 위젯: 최근 업데이트 순으로 시리즈 이름 + 글 개수 (아카이브 위젯 대체) */ -}}
+{{- /* 시리즈 위젯: 최근 업데이트 순 시리즈 + 글 개수.
+       기존 아카이브 위젯과 동일한 버튼(카드 행) 룩을 위해 테마의
+       archives 위젯 클래스(widget-archive--list / archives-year)를 재사용. */ -}}
 {{- $context := .Context -}}
 {{- $limit := 5 -}}
 {{- with .Params }}{{ $limit = default $limit .limit }}{{ end -}}
@@ -11,24 +13,30 @@
 {{- end -}}
 {{- if $items -}}
 {{- $items = sort $items "last" "desc" -}}
-<section class="widget serieslist">
+<section class="widget archives serieslist">
     <div class="widget-icon">
         {{ partial "helper/icon" "bookmarks" }}
     </div>
     <h2 class="widget-title section-title">
         <a href="{{ $seriesPage.RelPermalink }}">시리즈</a>
     </h2>
-    <ul class="serieslist-list">
+    <div class="widget-archive--list">
         {{- range first $limit $items }}
-        <li class="serieslist-item">
-            <a href="{{ .page.RelPermalink }}">{{ .page.LinkTitle }}</a>
-            <span class="serieslist-count">({{ .count }})</span>
-        </li>
+        <div class="archives-year">
+            <a href="{{ .page.RelPermalink }}">
+                <span class="year">{{ .page.LinkTitle }}</span>
+                <span class="count">{{ .count }}</span>
+            </a>
+        </div>
         {{- end }}
-    </ul>
-    {{- if gt (len $items) $limit }}
-    <a class="serieslist-more" href="{{ $seriesPage.RelPermalink }}">전체 시리즈 보기 →</a>
-    {{- end }}
+        {{- if gt (len $items) $limit }}
+        <div class="archives-year">
+            <a href="{{ $seriesPage.RelPermalink }}">
+                <span class="year">전체 시리즈 보기</span>
+            </a>
+        </div>
+        {{- end }}
+    </div>
 </section>
 {{- end -}}
 {{- end -}}
