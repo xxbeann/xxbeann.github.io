@@ -72,7 +72,7 @@ hasCJKLanguage = true                       # 한글 요약/글자수 정확히
     homepage = [
       { type = "search" },
       { type = "visitor" },
-      { type = "archives", params = { limit = 5 } },
+      { type = "series", params = { limit = 5 } },
       { type = "categories", params = { limit = 10 } },
       { type = "tag-cloud", params = { limit = 10 } },
     ]

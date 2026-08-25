@@ -138,6 +138,17 @@ a.series-title:hover { color: var(--card-text-color-main); text-decoration: unde
 .widget.categorylist .categorylist-count { margin-left: 5px; font-size: 1.2rem;
     color: var(--card-text-color-secondary); font-variant-numeric: tabular-nums; }
 
+/* 9.5) 시리즈 위젯 (아카이브 위젯 대체 — 최근 업데이트 순) */
+.widget.serieslist .serieslist-list { list-style: none; margin: 0; padding: 0; }
+.widget.serieslist .serieslist-item { padding: 6px 0; font-size: 1.4rem; line-height: 1.4; }
+.widget.serieslist .serieslist-item a { color: var(--card-text-color-main); text-decoration: none; }
+.widget.serieslist .serieslist-item a:hover { color: var(--accent-color); text-decoration: underline; }
+.widget.serieslist .serieslist-count { margin-left: 5px; font-size: 1.2rem;
+    color: var(--card-text-color-secondary); font-variant-numeric: tabular-nums; }
+.widget.serieslist .serieslist-more { display: inline-block; margin-top: 8px; font-size: 1.25rem;
+    color: var(--card-text-color-secondary); text-decoration: none; }
+.widget.serieslist .serieslist-more:hover { color: var(--card-text-color-main); text-decoration: underline; }
+
 /* 7) 방문자수 위젯 (GoatCounter — 티스토리식 오늘/전체) */
 .widget.visitor .visitor--list {
     display: flex;
